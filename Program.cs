@@ -4,7 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        int x = 10, y = 40;
+        int mapRadius = 6;
+        int x = 44, y = 43;
         ConsoleKeyInfo cki;
 
         string[] map2 = { "#######", "#-----#", "#-----#", "#--M--+", "#-----#", "+-----#", "#-----#", "#######" };
@@ -97,40 +98,48 @@ class Program
             ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
         };
 
-        foreach (string s in map2)
-        {
-            System.Console.WriteLine(s);
-        }
+        PrintMap(map, x, y, mapRadius);
 
         while (true)
         {
-            cki = System.Console.ReadKey();
+            cki = System.Console.ReadKey(true);
             if (cki.KeyChar == 'w') y--;
             if (cki.KeyChar == 'a') x--;
             if (cki.KeyChar == 's') y++;
             if (cki.KeyChar == 'd') x++;
             System.Console.Clear();
-            for (int i = 0; i < 3; i++)
-            {
-                string s1, s2, s3;
 
-                //s1 = map2.(map2[1], 1, 1);
-
-                
-            }
-
-            string ps = map[y].Substring(x - 3, 3) + "P" + map[y].Substring(x + 1, 3);
-
-            System.Console.WriteLine(map[y - 3].Substring(x - 3, 7));
-            System.Console.WriteLine(map[y - 2].Substring(x - 3, 7));
-            System.Console.WriteLine(map[y - 1].Substring(x - 3, 7));
-            System.Console.WriteLine(ps);
-            System.Console.WriteLine(map[y + 1].Substring(x - 3, 7));
-            System.Console.WriteLine(map[y + 2].Substring(x - 3, 7));
-            System.Console.WriteLine(map[y + 3].Substring(x - 3, 7));
+            PrintMap(map, x, y, mapRadius);
 
 
             System.Console.Write($"X: {x} Y: {y}");
         }
+    }
+
+    static void PrintMap(string[] map, int x, int y, int mapRadius)
+    {
+        string ps = map[y].Substring(x - mapRadius, mapRadius) + "P" + map[y].Substring(x + 1, mapRadius);
+
+        for (int i = mapRadius; i > 0; i--)
+        {
+            System.Console.WriteLine(map[y - i].Substring(x - mapRadius, (mapRadius * 2 + 1)));
+        }
+
+        System.Console.WriteLine(ps);
+
+        for (int i = 0; i < mapRadius; i++)
+        {
+            System.Console.WriteLine(map[y + i].Substring(x - mapRadius, (mapRadius * 2 + 1)));
+        }
+
+        /*
+        System.Console.WriteLine(map[y - 3].Substring(x - 3, 7));
+        System.Console.WriteLine(map[y - 2].Substring(x - 3, 7));
+        System.Console.WriteLine(map[y - 1].Substring(x - 3, 7));
+        System.Console.WriteLine(ps);
+        System.Console.WriteLine(map[y + 1].Substring(x - 3, 7));
+        System.Console.WriteLine(map[y + 2].Substring(x - 3, 7));
+        System.Console.WriteLine(map[y + 3].Substring(x - 3, 7));
+        */
     }
 }

@@ -8,5 +8,8 @@ namespace Poke_e_main
 {
     internal class Monster
     {
+        public Monster() { }
     }
+
 }
+
